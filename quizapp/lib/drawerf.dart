@@ -30,7 +30,7 @@ class _DrawerfState extends State<Drawerf> {
         ..rotateZ(isDrawerOpen ? -50 : 0),
       duration: const Duration(milliseconds: 200),
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 180, 152, 255),
+        color: Color.fromARGB(255, 194, 175, 247),
         borderRadius:
             isDrawerOpen ? BorderRadius.circular(40) : BorderRadius.circular(0),
       ),
