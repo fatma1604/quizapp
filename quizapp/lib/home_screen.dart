@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:quizzscreen/config/constant/color.dart';
+import 'package:quizzscreen/config/constant/images.dart';
+import 'package:quizzscreen/config/constant/text.dart';
+import 'package:quizzscreen/config/constant/text_them.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen(this.onStartButtonPressed, {super.key});
   final void Function() onStartButtonPressed;
 
-  Widget build(BuildContext buildContext) {
+  // ignore: annotate_overrides
+  Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.deepPurpleAccent,
       body: Center(
@@ -13,25 +18,13 @@ class HomeScreen extends StatelessWidget {
           children: [
             // asset
             Image.asset(
-              "assets/images/quiz-logo.png",
+              AppImage.anasayfa,
               width: 240,
             ),
 
             const Text(
-              "Quiz App",
-              style: TextStyle(
-                color: Color.fromARGB(255, 243, 128, 166),
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 1.5,
-                shadows: [
-                  Shadow(
-                    blurRadius: 3.0,
-                    color: Color.fromARGB(225, 160, 130, 243),
-                    offset: Offset(2.0, 2.0),
-                  ),
-                ],
-              ),
+              AppText.questionApp,
+              style:AppTextTheme.questionApp
             ),
 
             ElevatedButton(
@@ -39,7 +32,7 @@ class HomeScreen extends StatelessWidget {
                 onStartButtonPressed();
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor:const Color.fromARGB(255, 243, 128, 166),
+                backgroundColor:AppColor.button,
                 elevation: 4, // Buton yüksekliği
                 padding:const EdgeInsets.symmetric(
                     vertical: 10,
@@ -50,17 +43,12 @@ class HomeScreen extends StatelessWidget {
                     bottomRight: Radius.circular(40),
                   ),
                 ),
-                shadowColor: const Color.fromARGB(255, 95, 87, 87)
+                shadowColor:AppColor.golge
                     .withOpacity(0.4), // Gölgelendirme rengi ve opaklığı
               ),
               child:const Text(
-                "Oyuna Başla",
-                style: TextStyle(
-                  color:
-                      Color.fromARGB(255, 240, 219, 219), // Buton metin rengi
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
+                AppText.oyun,
+                style:AppTextTheme.writing
               ),
             ),
           ],

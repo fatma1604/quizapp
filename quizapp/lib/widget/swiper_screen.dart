@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:quizzscreen/data/questions.dart';
-import 'package:quizzscreen/finish_screen.dart';
+import 'package:quizzscreen/widget/finish_screen.dart';
 import 'package:quizzscreen/home_screen.dart';
-import 'package:quizzscreen/quizscreen.dart';
+import 'package:quizzscreen/widget/quizscreen.dart';
 
 class SwiperScreen extends StatefulWidget {
+  // ignore: use_super_parameters
   const SwiperScreen({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _SwiperScreenState createState() => _SwiperScreenState();
 }
 
@@ -28,8 +30,6 @@ class _SwiperScreenState extends State<SwiperScreen> {
 
   void addAnswer(String answer) {
     userAnswers.add(answer);
-    print("Listeye yeni cevap eklendi:");
-    print(userAnswers);
     if (userAnswers.length >= questions.length) {
       // Kullanıcı tüm soruları cevapladıysa, FinishScreen'e geç
       goToFinishScreen();

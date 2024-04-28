@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quizzscreen/config/constant/color.dart';
+import 'package:quizzscreen/config/constant/text_them.dart';
 import 'package:quizzscreen/data/questions.dart';
 
 class QuizScreen extends StatefulWidget {
@@ -22,6 +24,7 @@ class _QuizState extends State<QuizScreen> {
   void changeQuestion() {
     setState(() {
       if (questions.length - 1 > selectedQuestionIndex)
+        // ignore: curly_braces_in_flow_control_structures
         selectedQuestionIndex++;
       else {
         // Quizi bitirme
@@ -32,7 +35,7 @@ class _QuizState extends State<QuizScreen> {
   @override
   Widget build(BuildContext buildContext) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 182, 159, 247),
+      backgroundColor: AppColor.drawerBac,
       body: Center(
         child: Container(
           margin: const EdgeInsets.all(40),
@@ -40,11 +43,8 @@ class _QuizState extends State<QuizScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                questions[selectedQuestionIndex].question,
-                style: const TextStyle(
-                    fontSize: 25, color: Color.fromARGB(255, 73, 63, 63)),
-              ),
+              Text(questions[selectedQuestionIndex].question,
+                  style: AppTextTheme.question),
               ...questions[selectedQuestionIndex].answers.map(
                 (answer) {
                   return ElevatedButton(
@@ -54,17 +54,12 @@ class _QuizState extends State<QuizScreen> {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor:
-                          const  Color.fromARGB(255, 248, 172, 197),
-                        shape:const RoundedRectangleBorder(
+                            const Color.fromARGB(255, 248, 172, 197),
+                        shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(
-                                20), 
-                            bottomRight: Radius.circular(
-                                20), 
+                            topLeft: Radius.circular(20),
+                            bottomRight: Radius.circular(20),
                           ),
-                          side: BorderSide(
-                            color: Color.fromARGB(255, 143, 109, 236),
-                          ), 
                         ),
                       ),
                       child: Text(answer));

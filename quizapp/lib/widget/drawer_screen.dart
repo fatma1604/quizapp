@@ -1,7 +1,14 @@
-import 'package:flutter/material.dart';
-import 'package:quizzscreen/home_screen.dart';
-import 'package:quizzscreen/quizscreen.dart';
+// ignore_for_file: unused_import, library_private_types_in_public_api, prefer_const_constructors, use_key_in_widget_constructors
 
+import 'package:flutter/material.dart';
+import 'package:quizzscreen/config/constant/color.dart';
+import 'package:quizzscreen/config/constant/images.dart';
+import 'package:quizzscreen/config/constant/text.dart';
+import 'package:quizzscreen/config/constant/text_them.dart';
+import 'package:quizzscreen/home_screen.dart';
+import 'package:quizzscreen/widget/quizscreen.dart';
+
+// ignore: use_key_in_widget_constructors
 class DrawerScreen extends StatefulWidget {
   @override
   _DrawerScreenState createState() => _DrawerScreenState();
@@ -11,9 +18,9 @@ class _DrawerScreenState extends State<DrawerScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-    color:  Colors.deepPurpleAccent,
+      color: AppColor.drawerBac,
       child: Padding(
-        padding: EdgeInsets.only(top: 50, left: 40, bottom: 70),
+        padding: const EdgeInsets.only(top: 50, left: 40, bottom: 70),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -24,9 +31,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                     borderRadius: BorderRadius.circular(20),
                     child: const Image(
                       fit: BoxFit.cover,
-                      image: AssetImage(
-                        'assets/images/indir.png',
-                      ),
+                      image: AssetImage(AppImage.profil),
                     ),
                   ),
                 ),
@@ -35,10 +40,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 ),
                 const Text(
                   'Fatma Nur Kamış',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold),
+                  style: AppTextTheme.writing,
                 ),
               ],
             ),
@@ -46,17 +48,14 @@ class _DrawerScreenState extends State<DrawerScreen> {
               children: <Widget>[
                 NewRow(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => QuizScreen(
-                                  chooseAnswer: (answer) {},
-                                )));
+                   
+                    Navigator.of(context).pushNamed("/quizscreen");
+                  
                   },
                   text: 'Fluttar Sorulalrı',
                   icon: Icons.error_outline,
                 ),
-               const SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 NewRow(
@@ -64,13 +63,13 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   text: 'Profile',
                   icon: Icons.person_outline,
                 ),
-               const SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
-             const   SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
-              const  SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
                 NewRow(
@@ -78,7 +77,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   text: 'Hint',
                   icon: Icons.lightbulb_outline,
                 ),
-              const  SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
               ],
@@ -89,23 +88,18 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   Icons.cancel,
                   color: Colors.white.withOpacity(0.5),
                 ),
-            const    SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 TextButton(
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => HomeScreen(
-                                  () {},
-                                )));
+                    Navigator.of(context).pushNamed("/home");
                   },
                   child: Text(
-                    'Log out',
-                    style: TextStyle(color: Colors.white.withOpacity(0.5)),
+                    AppText.cikis,
+                   style: AppTextTheme.writing,),
                   ),
-                ),
+                
               ],
             )
           ],
@@ -142,12 +136,12 @@ class NewRow extends StatelessWidget {
             icon,
             color: Colors.white,
           ),
-        const  SizedBox(
+          const SizedBox(
             width: 20,
           ),
           Text(
             text,
-            style:const TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
           ),
         ],
       ),
