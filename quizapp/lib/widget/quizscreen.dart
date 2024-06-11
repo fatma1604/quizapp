@@ -2,31 +2,58 @@ import 'package:flutter/material.dart';
 import 'package:quizzscreen/config/constant/color.dart';
 import 'package:quizzscreen/config/constant/text_them.dart';
 import 'package:quizzscreen/data/questions.dart';
+import 'dart:async';
 
 class QuizScreen extends StatefulWidget {
-  // named argument
+  const QuizScreen({Key? key, required this.chooseAnswer}) : super(key: key);
 
-  // default argumentlar required olarak gelir
-  // named argumentlar required olarak gelmez, gerektiğinde işaretlenmesi gerekir.
-  const QuizScreen({super.key, required this.chooseAnswer});
   final void Function(String answer) chooseAnswer;
 
   @override
-  State<QuizScreen> createState() {
-    return _QuizState();
-  }
+  State<QuizScreen> createState() => _QuizState();
 }
 
-// navigator
 class _QuizState extends State<QuizScreen> {
   int selectedQuestionIndex = 0;
+  int timerSeconds = 25;
+  bool isAnswered = false;
+  Timer? _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    startTimer();
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
+  void startTimer() {
+    _timer = Timer.periodic(Duration(seconds: 1), (Timer timer) {
+      setState(() {
+        if (timerSeconds > 0) {
+          timerSeconds--;
+        } else {
+          timer.cancel();
+          if (!isAnswered) {
+            changeQuestion();
+          }
+        }
+      });
+    });
+  }
 
   void changeQuestion() {
     setState(() {
-      if (questions.length - 1 > selectedQuestionIndex)
-        // ignore: curly_braces_in_flow_control_structures
+      isAnswered = false;
+      timerSeconds = 25;
+      if (questions.length - 1 > selectedQuestionIndex) {
         selectedQuestionIndex++;
-      else {
+        startTimer();
+      } else {
         // Quizi bitirme
       }
     });
@@ -35,40 +62,57 @@ class _QuizState extends State<QuizScreen> {
   @override
   Widget build(BuildContext buildContext) {
     return Scaffold(
-      backgroundColor: AppColor.drawerBac,
-      body: Center(
+        body: Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [AppColor.drawerBac, Colors.white], // İki renk belirleyin
+        ),
+      ),
+      child: Center(
         child: Container(
           margin: const EdgeInsets.all(40),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(questions[selectedQuestionIndex].question,
-                  style: AppTextTheme.question),
+              Text(
+                questions[selectedQuestionIndex].question,
+                style: AppTextTheme.question,
+              ),
               ...questions[selectedQuestionIndex].answers.map(
                 (answer) {
                   return ElevatedButton(
-                      onPressed: () {
-                        widget.chooseAnswer(answer);
-                        changeQuestion();
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            const Color.fromARGB(255, 248, 172, 197),
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            bottomRight: Radius.circular(20),
-                          ),
+                    onPressed: () {
+                      widget.chooseAnswer(answer);
+                      setState(() {
+                        isAnswered = true;
+                      });
+                      changeQuestion();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColor.button,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          bottomRight: Radius.circular(20),
                         ),
                       ),
-                      child: Text(answer));
+                    ),
+                    child: Text(answer,style:AppTextTheme.answerStyle ,),
+                  );
                 },
+              ),
+              SizedBox(height: 20),
+              Text(
+                'Süre: $timerSeconds',
+                style: TextStyle(fontSize: 18),
               ),
             ],
           ),
         ),
       ),
-    );
+    ));
   }
 }

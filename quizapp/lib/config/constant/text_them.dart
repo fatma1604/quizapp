@@ -20,42 +20,28 @@ class AppTextTheme {
     fontWeight: FontWeight.w400,
   );
 
-  static const TextStyle correctAnswerStyle = TextStyle(
-    fontSize: 20,
-    color: Color.fromARGB(255, 6, 233, 97),
-    fontWeight: FontWeight.bold,
-  );
-
-  static const TextStyle wrongAnswerStyle = TextStyle(
-    fontSize: 20,
-    color: Color.fromARGB(255, 233, 67, 6),
-    fontWeight: FontWeight.bold,
-  );
 
   static const TextStyle questionCountStyle = TextStyle(
-    fontSize: 20,
+    fontSize: 15,
     color: Color.fromARGB(255, 6, 59, 233),
     fontWeight: FontWeight.bold,
   );
-  
+
   static const TextStyle question =
-      TextStyle(color:  Color.fromARGB(255, 73, 63, 63), fontSize: 25);
-  static const TextStyle writing =
-      TextStyle(color: Color.fromARGB(255, 243, 128, 166),
-       fontSize: 32, 
-       fontWeight: FontWeight.bold,
-       letterSpacing: 1.5,
-       shadows: [
+      TextStyle(color: Color.fromARGB(255, 73, 63, 63), fontSize: 25);
+  static const TextStyle writing = TextStyle(
+      color: Color.fromARGB(255, 109, 93, 98),
+      fontSize: 32,
+      fontWeight: FontWeight.bold,
+      letterSpacing: 1.5,
+      shadows: [
         Shadow(
-                    blurRadius: 3.0,
-                    color: Color.fromARGB(225, 160, 130, 243),
-                    offset: Offset(2.0, 2.0),
-                  ),
-       ]
-       );
+          blurRadius: 3.0,
+          color: Color.fromARGB(225, 160, 130, 243),
+          offset: Offset(2.0, 2.0),
+        ),
+      ]);
 
-      static const TextStyle questionApp =
-      TextStyle(color:  Color.fromARGB(255, 73, 63, 63), fontSize: 25);
-  
+  static const TextStyle questionApp =
+      TextStyle(color: Color.fromARGB(255, 73, 63, 63), fontSize: 25);
 }
-

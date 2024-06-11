@@ -6,6 +6,6 @@ class AppText {
   static const String wrong = 'Toplam Yanlış Sayınız';
   static const String question = 'Toplam Soru Sayınız';
   static const String questionApp = "Quiz App";
-  static const String oyun = "Oyuna Başla";
+  static const String oyun = "Qize Başla";
   static const String cikis = 'Log out';
 }
